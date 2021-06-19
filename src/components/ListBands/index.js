@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const CreateRows = (params) => {
+const CreateRows = ({ band }) => {
+    const { name } = band;
     return (
         <tr>
             <td>
                 <button className="btn btn-primary">+1</button>
             </td>
             <td>
-                <input type="text" className="form-control" />
+                <input type="text" className="form-control" value={name} />
             </td>
             <td>
                 <h3>15</h3>
@@ -19,7 +20,13 @@ const CreateRows = (params) => {
     );
 };
 
-const ListBands = () => {
+const ListBands = ({ data }) => {
+    const [bands, setBands] = useState(data);
+
+    useEffect(() => {
+        setBands(data);
+    }, [data]);
+
     return (
         <>
             <table className="table table-stripped">
@@ -32,7 +39,9 @@ const ListBands = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <CreateRows />
+                    {bands.map((band) => {
+                        return <CreateRows key={band.id} band={band} />;
+                    })}
                 </tbody>
             </table>
         </>

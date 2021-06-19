@@ -13,6 +13,7 @@ const connectSocketServer = (params) => {
 function App() {
     const [socket] = useState(connectSocketServer());
     const [online, setOnline] = useState(false);
+    const [bands, setBands] = useState([]);
 
     useEffect(() => {
         socket.on('connect', () => {
@@ -20,6 +21,9 @@ function App() {
         });
         socket.on('disconnect', () => {
             setOnline(false);
+        });
+        socket.on('current-bands', (bands) => {
+            setBands(bands);
         });
     }, [socket]);
 
@@ -39,7 +43,7 @@ function App() {
             <hr />
             <div className="row">
                 <div className="col-8 mt-4">
-                    <ListBands />
+                    <ListBands data={bands} />
                 </div>
                 <div className="col-4 mt-4">
                     <AddBand />
