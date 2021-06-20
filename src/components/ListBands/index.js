@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-const CreateRows = ({ band, onChange, onBlur }) => {
+const CreateRows = ({ band, onChange, onBlur, vote }) => {
     const { name, id, votes } = band;
     return (
         <tr>
             <td>
-                <button className="btn btn-primary">+1</button>
+                <button className="btn btn-primary" onClick={() => vote(id)}>
+                    +1
+                </button>
             </td>
             <td>
                 <input
@@ -26,7 +28,7 @@ const CreateRows = ({ band, onChange, onBlur }) => {
     );
 };
 
-const ListBands = ({ data }) => {
+const ListBands = ({ data, vote }) => {
     const [bands, setBands] = useState(data);
 
     useEffect(() => {
@@ -69,6 +71,7 @@ const ListBands = ({ data }) => {
                                 band={band}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
+                                vote={vote}
                             />
                         );
                     })}
