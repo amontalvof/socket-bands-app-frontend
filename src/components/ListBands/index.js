@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
-const CreateRows = ({ band, onChange, onBlur, vote }) => {
+const CreateRows = ({ band, onChange, onBlur, voteBand, deleteBand }) => {
     const { name, id, votes } = band;
     return (
         <tr>
             <td>
-                <button className="btn btn-primary" onClick={() => vote(id)}>
+                <button
+                    className="btn btn-primary"
+                    onClick={() => voteBand(id)}
+                >
                     +1
                 </button>
             </td>
@@ -22,13 +25,18 @@ const CreateRows = ({ band, onChange, onBlur, vote }) => {
                 <h3>{votes}</h3>
             </td>
             <td>
-                <button className="btn btn-outline-danger">Delete</button>
+                <button
+                    className="btn btn-outline-danger"
+                    onClick={() => deleteBand(id)}
+                >
+                    Delete
+                </button>
             </td>
         </tr>
     );
 };
 
-const ListBands = ({ data, vote }) => {
+const ListBands = ({ data, voteBand, deleteBand }) => {
     const [bands, setBands] = useState(data);
 
     useEffect(() => {
@@ -71,7 +79,8 @@ const ListBands = ({ data, vote }) => {
                                 band={band}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                vote={vote}
+                                voteBand={voteBand}
+                                deleteBand={deleteBand}
                             />
                         );
                     })}
