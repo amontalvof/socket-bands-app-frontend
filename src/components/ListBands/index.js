@@ -36,7 +36,7 @@ const CreateRows = ({ band, onChange, onBlur, voteBand, deleteBand }) => {
     );
 };
 
-const ListBands = ({ data, voteBand, deleteBand }) => {
+const ListBands = ({ data, voteBand, deleteBand, changeName }) => {
     const [bands, setBands] = useState(data);
 
     useEffect(() => {
@@ -57,7 +57,7 @@ const ListBands = ({ data, voteBand, deleteBand }) => {
 
     const handleBlur = (id, name) => {
         console.log(id, name);
-        // TODO: disparar el evento de socket
+        changeName(id, name);
     };
 
     return (
