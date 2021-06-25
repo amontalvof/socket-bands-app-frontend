@@ -2,13 +2,10 @@ import { useContext } from 'react';
 import { SocketContext } from '../context/socketContext';
 import { AddBand } from '../components/AddBand';
 import ListBands from '../components/ListBands';
+import ChartBands from '../components/ChartBands';
 
 function HomePage() {
     const { online } = useContext(SocketContext);
-
-    // const createBand = (name) => {
-    //     socket.emit('create-band', { name });
-    // };
 
     return (
         <div className="container">
@@ -25,10 +22,17 @@ function HomePage() {
             <h1>Bands</h1>
             <hr />
             <div className="row">
+                <div className="col-6">
+                    <ChartBands />
+                </div>
+            </div>
+            <div className="row">
                 <div className="col-8 mt-4">
                     <ListBands />
                 </div>
-                <div className="col-4 mt-4">{/* <AddBand /> */}</div>
+                <div className="col-4 mt-4">
+                    <AddBand />
+                </div>
             </div>
         </div>
     );
